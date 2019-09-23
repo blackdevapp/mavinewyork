@@ -42,6 +42,7 @@ return [
     'debug' => env('APP_DEBUG', false),
 
     /** add admin_url to use in route @by: @MAGIC 20190923 */
+    
     'admin_url' => env('ADMIN_URL', '/admin'),
 
     /*
