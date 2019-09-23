@@ -11,5 +11,6 @@
 |
 */
 
+Route::get('/admin', 'adminController@index');
 
 Route::view('/{path?}', 'app');
