@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/admin', 'adminController@index');
-//Route::get(config('app.admin_url'), 'adminController@index');
-//Route::get(config('app.admin_url').'/login', 'adminController@showLogin');
+
+Route::get(config('app.admin_url'), 'adminController@index');
+Route::get(config('app.admin_url').'/login', 'adminController@showLogin');
 
 Route::view('/{path?}', 'app');
