@@ -44,6 +44,18 @@ return [
     /** add admin_url to use in route @by: @MAGIC 20190923 */
     
     'admin_url' => env('ADMIN_URL', '/admin'),
+    
+    /** change data to hash type - it will use everywhere @by: @MAGIC 20190925 */
+    'hash' => function($data, $type='password'){
+        switch($type){
+            case 'admin_password':
+                $data = md5(md5(sha1($data)));
+                break;
+            default:
+                // nothing to do
+        }
+        return $data;
+    },
 
     /*
     |--------------------------------------------------------------------------

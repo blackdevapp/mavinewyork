@@ -9,7 +9,10 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    
+    /** current table is admin_users @by: @MAGIC 20190924 */
+    protected $table = 'admin_users';
+    
     /**
      * The attributes that are mass assignable.
      *

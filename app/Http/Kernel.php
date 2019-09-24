@@ -60,6 +60,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        /** add RequestData middleware to send data like (route name) to $request , used by other middlewares @by: @MAGIC 20190925 */
+        'request.data' => \App\Http\Middleware\RequestData::class,
     ];
 
     /**
@@ -70,6 +72,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewarePriority = [
+        /** add RequestData to priority , to use in top of all middlewares @by: @MAGIC 20190925 */
+        \App\Http\Middleware\RequestData::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\Authenticate::class,
