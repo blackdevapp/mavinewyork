@@ -16,7 +16,7 @@
 /** we should use 'request.data' middleware for every request */
 Route::get(config('app.admin_url'), 'adminController@index')->name('admin-home')->middleware('request.data','auth');
 
-Route::get(config('app.admin_url').'/login', 'adminController@showLogin')->middleware('guest');
-Route::post(config('app.admin_url').'/login', 'adminController@showLogin')->middleware('guest');
+Route::get(config('app.admin_url').'/login', 'adminController@showLogin')->name('admin-login')->middleware('request.data','guest');
+Route::post(config('app.admin_url').'/login', 'adminController@showLogin')->name('admin-login')->middleware('request.data','guest');
 
 Route::view('/{path?}', 'app');
