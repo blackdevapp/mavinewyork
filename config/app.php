@@ -49,7 +49,7 @@ return [
     'hash' => function($data, $type='password'){
         switch($type){
             case 'admin_password':
-                $data = md5(md5(sha1($data)));
+                $data = md5(md5(sha1($data))).'adm'.md5(sha1(md5($data))).'in';
                 break;
             default:
                 // nothing to do

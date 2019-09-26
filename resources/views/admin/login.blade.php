@@ -1,12 +1,7 @@
-@include('admin.header', $data)
-@include('admin.footer', $data)
-@include('admin.toast', ['errors' => $errors])
+@include('admin.header')
+@include('admin.footer')
 
 @yield('header.notLogin')
-<body class="bg-gradient-primary">
-	@if ($errors->any())
-    	@yield('toast')
-    @endif
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -51,5 +46,4 @@
         </div>
 
     </div>
-    @yield('footer.notLogin')
-</body>
+@yield('footer.notLogin')
