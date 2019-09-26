@@ -4,13 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AdminUsers as AdminUsers;
+use App\AdminMenu as AdminMenu;
 use Validator;
 
 class adminController extends Controller
 {
+    /** this function use in this class and will get and sort menus to use into admin pages @by: @MAGIC 20190926 */
+    public static function menu(){
+        $data = AdminMenu::where([
+            ['is_active', 1]
+        ])->get();
+        foreach($data as $i => $d){
+            // change first character to uppercase @by: @MAGIC 20190926
+            $d->name = ucfirst($d->name);
+            // add admin_url to all menu links @by: @MAGIC 20190926
+            $d->link = config('app.admin_url').$d->link;
+        }
+        return $data;
+    }
     public function home(Request $request){
         /** check if admin is login or not , then refer to current page */
-        return view('admin.home')->with(['router' => $request->router]);
+        return view('admin.home')->with(['router' => $request->router, 'menu' => $this->menu()]);
     }
     public function showLogin(Request $request){
         /** check if session exists and return to home page @by: @MAGIC 20190926 */

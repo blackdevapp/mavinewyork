@@ -21,6 +21,9 @@ Route::post(config('app.admin_url').'/login', 'adminController@showLogin')->name
 
 Route::get(config('app.admin_url').'/logout', 'adminController@logout')->name('admin-logout')->middleware('request.data','auth');
 
+/** add modules here */
+Route::get(config('app.admin_url').'/system/images', 'adminSystemController@showImages')->name('admin-system')->middleware('request.data','auth');
+
 
 
 Route::view('/{path?}', 'app');
