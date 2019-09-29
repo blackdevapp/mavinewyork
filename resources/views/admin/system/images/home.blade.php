@@ -1,6 +1,6 @@
 <?php /** admin system image home page 
       /* set type to table that will append table data  */ ?>
-@include('admin.static', ['type' => 'table', 'cid' => $cid])
+@include('admin.static', ['type' => 'table', 'cid' => $cid, 'cfield' => $cfield])
 @yield('static.base')
 	<div>
 		<a href="{{ config('app.admin_url').'/system/images/create' }}" class="btn btn-success btn-icon-split">
@@ -14,17 +14,16 @@
 	<div>
 	   <!-- DataTales Example -->
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-        </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="{{ $cid }}" width="100%" cellspacing="0">
               <thead>
                 <tr>
                 	@foreach($cfield as $field_id => $field)
-                  		<th data-data="{{ $field['id'] }}" data-name="{{ $field['id'] }}">{{ $field['name'] }}</th>
+            			<th data-data="{{ $field['id'] }}" data-name="{{ $field['id'] }}">{{ $field['name'] }}</th>
                   	@endforeach
+                  	<!-- edit , view and delete data here -->
+                  	<th data-data="settings" data-name="settings"></th>
                 </tr>
               </thead>
               <tfoot>
@@ -32,13 +31,15 @@
                 	@foreach($cfield as $field_id => $field)
                   		<th data-data="{{ $field['id'] }}" data-name="{{ $field['id'] }}">{{ $field['name'] }}</th>
                   	@endforeach
+                  	<th data-data="settings" data-name="settings"></th>
                 </tr>
               </tfoot>
               <tbody>
                 <tr>
                 	@foreach($cfield as $field_id => $field)
-                  		<td data-data="{{ $field['id'] }}" data-name="{{ $field['id'] }}">{{ $field['name'] }}</td>
+                  		<td data-data="{{ $field['id'] }}" data-name="{{ $field['id'] }}"></td>
                   	@endforeach
+                  	<th data-data="settings" data-name="settings"></th>
                 </tr>
               </tbody>
             </table>
