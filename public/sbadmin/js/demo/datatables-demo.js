@@ -4,7 +4,10 @@ $(document).ready(function() {
 	  'processing': true,
 	  'serverSide': true,
 	  "ajax": {
-		  "url": "scripts/jsonp.php",
+		  "url": "/get_tables/",
+		  "data": {
+			  id: '',
+		  },
 		  "dataType": "jsonp"
 	  }
   });

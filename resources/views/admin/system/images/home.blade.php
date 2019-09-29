@@ -1,6 +1,6 @@
 <?php /** admin system image home page 
       /* set type to table that will append table data  */ ?>
-@include('admin.static', ['type' => 'table'])
+@include('admin.static', ['type' => 'table', 'cid' => $cid])
 @yield('static.base')
 	<div>
 		<a href="{{ config('app.admin_url').'/system/images/create' }}" class="btn btn-success btn-icon-split">
@@ -19,43 +19,26 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="{{ $cid }}" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                	@foreach($cfield as $field_id => $field)
+                  		<th data-data="{{ $field['id'] }}" data-name="{{ $field['id'] }}">{{ $field['name'] }}</th>
+                  	@endforeach
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                	@foreach($cfield as $field_id => $field)
+                  		<th data-data="{{ $field['id'] }}" data-name="{{ $field['id'] }}">{{ $field['name'] }}</th>
+                  	@endforeach
                 </tr>
               </tfoot>
               <tbody>
                 <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                </tr>
-                <tr>
-                  <td>Garrett Winters</td>
-                  <td>Accountant</td>
-                  <td>Tokyo</td>
-                  <td>63</td>
-                  <td>2011/07/25</td>
-                  <td>$170,750</td>
+                	@foreach($cfield as $field_id => $field)
+                  		<td data-data="{{ $field['id'] }}" data-name="{{ $field['id'] }}">{{ $field['name'] }}</td>
+                  	@endforeach
                 </tr>
               </tbody>
             </table>

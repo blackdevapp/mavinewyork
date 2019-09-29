@@ -24,6 +24,9 @@ Route::get(config('app.admin_url').'/logout', 'adminController@logout')->name('a
 /** add modules here */
 Route::get(config('app.admin_url').'/system/images', 'adminSystemController@showImages')->name('admin-system')->middleware('request.data','auth');
 
+/** get table data , as ajax request */
+Route::get(config('app.admin_url').'/get_tables', 'adminController@getTable')->name('admin-datatable')->middleware('request.data','auth');
+
 
 
 Route::view('/{path?}', 'app');

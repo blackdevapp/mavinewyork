@@ -76,10 +76,33 @@
   	@switch($type)
   		@case('table')
   			  <!-- Page level plugins -->
-              <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+              <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.js') }}"></script>
               <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
               <!-- Page level custom scripts -->
-              <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+              <script>
+              	$(document).ready(function() {
+            	  var table = $('#{{ $cid }}').DataTable({
+            		  'processing': true,
+            		  'serverSide': true,
+            		  "ajax": {
+            			  "url": "{{ config('app.admin_url') }}/get_tables/",
+            			  "data": {
+            				  cid: "{{ $cid }}",
+            			  },
+            			  "dataType": "json"
+            		  }
+            	  });
+            	  $('#{{ $cid }}').on( 'click', 'tr', function () {
+        	        if ( $(this).hasClass('selected') ) {
+        	            $(this).removeClass('selected');
+        	        }
+        	        else {
+        	            table.$('tr.selected').removeClass('selected');
+        	            $(this).addClass('selected');
+        	        }
+        	    } );
+            	});
+              </script>
   			@break
   		@default
   			<!-- nothing -->
