@@ -27,18 +27,4 @@ class DataTableNavigationController extends Controller
             'data' => $last_data[0],
         ];
     }
-    public static function set_data(Request $request, $table_data, $fields_list, $fields_data, $filtered_count=0, $count=0){
-        $i = 0;
-        foreach($table_data as $table){
-            $last_data[$i] = [];
-            foreach($fields_list as $fid => $field){
-                $table->$field = fieldsViewGet::init_data($fields_data[$fid], $table->$field);
-                $last_data[$i][$field] = $table->$field;
-            }
-            /** add settings table here @by: @MAGIC 20190929 */
-            $last_data[$i]['settings'] = fieldsViewGet::init_data(['type' => 'settings'], '');
-            $i++;
-        }
-        return [$last_data, $filtered_count, $count];
-    }
 }

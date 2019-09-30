@@ -8,7 +8,7 @@
               <i class="fas fa-check"></i>
             </span>
             <span class="text">{{ trans($router.'create') }}</span>
-          </a>
+      	</a>
 	</div>
 	<hr />
 	<div>
@@ -16,7 +16,7 @@
       <div class="card shadow mb-4">
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="{{ $cid }}" width="100%" cellspacing="0">
+            <table class="table table-hover" id="{{ $cid }}" width="100%" cellspacing="0">
               <thead>
                 <tr>
                 	@foreach($cfield as $field_id => $field)

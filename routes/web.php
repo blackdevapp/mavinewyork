@@ -22,7 +22,17 @@ Route::post(config('app.admin_url').'/login', 'adminController@showLogin')->name
 Route::get(config('app.admin_url').'/logout', 'adminController@logout')->name('admin-logout')->middleware('request.data','auth');
 
 /** add modules here */
-Route::get(config('app.admin_url').'/system/images', 'adminSystemController@showImages')->name('admin-system')->middleware('request.data','auth');
+Route::get(config('app.admin_url').'/system/images', 'adminSystemController@showImages')
+->name('admin-system')->middleware('request.data','auth');
+
+Route::get(config('app.admin_url').'/system/images/create', 'adminSystemController@createImages')
+->name('admin-system')->middleware('request.data','auth');
+
+Route::get(config('app.admin_url').'/system/images/edit/:id', 'adminSystemController@editImages')
+->name('admin-system')->middleware('request.data','auth');
+
+Route::get(config('app.admin_url').'/system/images/delete/:id', 'adminSystemController@deleteImages')
+->name('admin-system')->middleware('request.data','auth');
 
 /** get table data , as ajax request */
 Route::get(config('app.admin_url').'/get_tables', 'adminController@getTable')->name('admin-datatable')->middleware('request.data','auth');
