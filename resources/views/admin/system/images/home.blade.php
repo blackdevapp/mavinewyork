@@ -5,7 +5,7 @@
 	<div>
 		<a href="{{ config('app.admin_url').'/system/images/create' }}" class="btn btn-success btn-icon-split">
             <span class="icon text-white-50">
-              <i class="fas fa-check"></i>
+              <i class="fas fa-plus"></i>
             </span>
             <span class="text">{{ trans($router.'create') }}</span>
       	</a>
