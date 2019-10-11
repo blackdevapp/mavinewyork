@@ -18,22 +18,30 @@ class fieldsViewGetController extends Controller
                 $final_data = $data;
                 break;
             case 'image':
-                $final_data = '<img src="'.$data.'" />';
+                if($data!==''){
+                $final_data = '
+                    <a href="'.config('app.v_upload_path').$data.'" target="_blank">
+                        <img src="'.config('app.v_th_upload_path').$data.'" />
+                    </a>';
+                }
                 break;
             case 'boolean':
                 $final_data = $data;
                 break;
             case 'settings':
                 $final_data = '
-                    <a href="'.$field['data'].'edit/'.$data.'">
+                    <a class="transparent-color" href="'.$field['data'].'edit/'.$data.'">
                         <button class="btn btn-circle btn-info" data-id="'.$data.'"><i class="fas fa-edit"></i></button>
                     </a>
-                    <button class="btn btn-circle btn-danger" data-url="'.$field['data'].'delete/'.$data.'"><i class="fas fa-trash"></i></button>
+                    <a class="transparent-color href="#" data-toggle="modal" data-target="#delete_modal" data-title="'.$data.'" data-url="'.$field['data'].'delete/'.$data.'">
+                        <button class="btn btn-circle btn-danger delete-button"><i class="fas fa-trash"></i></button>
+                    </a>
                 ';
                 break;
             default:
                 $final_data = $data;
         }
+        //<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_modal">
         if(@$field['widget']) {
             switch($field['widget']){
                 case 'selection':
@@ -60,10 +68,15 @@ class fieldsViewGetController extends Controller
                 $final_data = '<input name="'.$field['name'].'" class="form-control" type="text" value="'.$data.'" />';
                 break;
             case 'image':
-                $final_data = '<img src="'.$data.'" /><input name="'.$field['name'].'" class="form-control" type="file" value="'.$data.'" />';
+                $final_data = $type=='create' ? 
+                '<input name="'.$field['name'].'" class="form-control" type="file" value="'.$data.'" />' :
+                '<br /><img src="'.config('app.v_th_upload_path').$data.'" /><br /><br /><input name="'.$field['name'].'" class="form-control" type="file" value="'.$data.'" />';
                 break;
             case 'boolean':
                 $final_data = '<input name="'.$field['name'].'" class="form-control" type="number" value="'.$data.'" />';
+                break;
+            case 'char':
+                $final_data = '<textarea class="form-control" name="'.$field['name'].'">'.$data.'</textarea>';
                 break;
             default:
                 $final_data = $data;

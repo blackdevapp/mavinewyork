@@ -3,6 +3,8 @@
 /sb-admin-2
 /public/hot
 /public/storage
+/public/image/uploaded
+/public/file_src_name_ext
 /storage/*.key
 /vendor
 .env

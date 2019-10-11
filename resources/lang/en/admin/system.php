@@ -7,6 +7,7 @@ return [
     'delete' => 'Delete',
     'back' => 'Back',
     'create_button' => 'Create',
+    'edit_button' => 'Edit',
     'active' => 'Is Active',
     'not_active' => 'Is Not Active',
 ];

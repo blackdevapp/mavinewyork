@@ -74,7 +74,7 @@ class adminController extends Controller
             'length' => 'required|min:1|max:20|regex:/^[0-9]{1,20}$/',
             'search.value' => 'nullable|min:3|max:50|regex:/^[a-zA-Z0-9 ]{3,50}$/',
             'draw' => 'required|min:1|max:20|regex:/^[0-9]{1,20}$/',
-            'cid' => 'required|min:3|max:50|regex:/^[a-zA-Z0-9_-]{3,50}$/',
+            'cid' => 'required|min:3|max:50|regex:/^[a-zA-Z0-9_\-]{3,50}$/',
         ]);
         //$validator->errors()
         $draw = $request->draw;

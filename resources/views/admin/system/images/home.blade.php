@@ -1,7 +1,9 @@
 <?php /** admin system image home page 
       /* set type to table that will append table data  */ ?>
 @include('admin.static', ['type' => 'table', 'cid' => $cid, 'cfield' => $cfield])
+@include('admin.modal', ['modal_id' => 'delete_modal', 'modal_title' => '', 'modal_body' => '', 'modal_button' => ''])
 @yield('static.base')
+	@yield('modal')
 	<div>
 		<a href="{{ config('app.admin_url').'/system/images/create' }}" class="btn btn-success btn-icon-split">
             <span class="icon text-white-50">

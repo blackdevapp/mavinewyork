@@ -46,16 +46,35 @@ return [
     'admin_url' => env('ADMIN_URL', '/admin'),
     
     /** change data to hash type - it will use everywhere @by: @MAGIC 20190925 */
-    'hash' => function($data, $type='password'){
+    'hash' => function($data=false, $type='password'){
         switch($type){
             case 'admin_password':
                 $data = md5(md5(sha1($data))).'adm'.md5(sha1(md5($data))).'in';
+                break;
+            /** set image names without postfix @by: @MAGIC 20191010 */
+            case 'image':
+                $id = rand(10000000,99999999999);
+                $id2 = rand(1000000,9999999999);
+                $id3 = rand(100,999);
+                $data = md5(md5($id).'_'.$id2).$id3.($data ? '.'.$data : '');
                 break;
             default:
                 // nothing to do
         }
         return $data;
     },
+    /** get extension of every file @by: @MAGIC 20191010 */
+    'file_ext' => function($file){
+        return last(explode('.', $file->getClientOriginalName()));
+    },
+    
+    /** set physical path for upload and thumbnail upload @by: @MAGIC 20191010 */
+    'upload_path'    => public_path().'\image\uploaded\static\\',
+    'th_upload_path' => public_path().'\image\uploaded\thumbnail\\',
+    
+    /** set virtual path for upload and thumbnail upload @by: @MAGIC 20191010 */
+    'v_upload_path'    => env('APP_URL').'/image/uploaded/static/',
+    'v_th_upload_path' => env('APP_URL').'/image/uploaded/thumbnail/',
 
     /*
     |--------------------------------------------------------------------------

@@ -45,5 +45,21 @@
     }, 1000, 'easeInOutExpo');
     e.preventDefault();
   });
+  /** create toast close @by: @MAGIC 20191010 */
+  $(document).on('click', 'button.close', function(e){
+	  var dismiss = this.dataset.dismiss || false;
+	  if(dismiss) {
+		  $(document).find('.'+dismiss).remove();
+	  }
+  });
+  
+  $(document).on('click', 'button.delete-button', function(e){
+	  var a = e.target.closest('a');
+	  $('.modal#delete_modal .modal-header .modal-title').html('Delete ' + a.dataset.title);
+	  $('.modal#delete_modal .modal-body').html('Are you sure to delete ' + a.dataset.title + '?');
+	  $('.modal#delete_modal .modal-footer').html(''+
+		'<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>'+
+	  	'<a href="'+a.dataset.url+'" class="transparent-color"><button class="btn btn-danger">Delete</button></a>');
+  });
 
 })(jQuery); // End of use strict

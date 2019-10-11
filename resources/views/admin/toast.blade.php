@@ -1,5 +1,5 @@
 @section('toast')
-<div style="position: absolute; top: 10px; left: 15px; z-index: 1">
+<div style="position: absolute; top: 10px; left: 15px; z-index: 4">
     <div class="toast fade show" data-autohide="true" data-delay="3000" id="myToast">
         <div class="toast-header" style="padding-top: 0px;padding-bottom: 0px;">
             <strong class="mr-auto"><i class="fas fa-exclamation"></i> Error</strong>

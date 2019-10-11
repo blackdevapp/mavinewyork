@@ -8,7 +8,49 @@ use App\Http\Controllers\fieldsViewGetController as fieldsViewGet; // set fields
 class staticController extends Controller
 {
     /** this function will set data to show in tables @by: @MAGIC 20190930 */
-    public static function set_data(Request $request, $table_data, $fields_list, $fields_data, $url, $filtered_count=0, $count=0){
+    public static function set_data(Request $request, $model, $fields, $search_fields, $data, $url){
+        $fields_list = [];
+        $fields_data = []; // this variable will send field data to init_data controller @by: @MAGIC 20190929
+        $orders = $data['orders'];
+        $order_by = [];
+        $has_order = false; // check if any order exists
+        foreach($orders as $order){
+            $order_field = $fields[$order['column']]['id'];
+            $order_by[] = $order_field.' '.$order['dir'];
+            $has_order = true;
+        }
+        // implode to convert array to string like name desc, order asc
+        $orderby = implode(',', $order_by);
+        foreach($fields as $field){
+            $fields_list[] = $field['id'];
+            $fields_data[] = $field;
+        }
+        $count = $model::select('id')->count();
+        $table_data = $model::select($fields_list)->skip($data['from'])->take($data['to']);
+        $filtered_count = $model::select('id');
+        if($has_order){
+            $filtered_count = $filtered_count->orderByRaw($orderby)->count();
+            $table_data = $table_data->orderByRaw($orderby);
+            if($data['search']!=''){
+                foreach($search_fields as $search_key => $search_field){
+                    if($search_key==0)
+                        $table_data = $table_data->where($search_field, 'like', '%'.$data['search'].'%');
+                    else
+                        $table_data = $table_data->orWhere($search_field, 'like', '%'.$data['search'].'%');
+                }
+            }
+        } else {
+            $filtered_count = $filtered_count->count();
+            if($data['search']!=''){
+                foreach($search_fields as $search_key => $search_field){
+                    if($search_key==0)
+                        $table_data = $table_data->where($search_field, 'like', '%'.$data['search'].'%');
+                        else
+                            $table_data = $table_data->orWhere($search_field, 'like', '%'.$data['search'].'%');
+                }
+            }
+        }
+        $table_data = $table_data->get();
         $i = 0;
         foreach($table_data as $table){
             $last_data[$i] = [];
